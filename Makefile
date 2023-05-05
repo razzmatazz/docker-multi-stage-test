@@ -14,12 +14,20 @@ test-inline-cache:
 		.
 	docker push localhost:5000/multi-stage-test-inline 
 
-test-registry-cache:
+test-registry-cache-max:
 	docker buildx build \
 		--push \
-		--cache-to type=registry,ref=localhost:5000/multi-stage-test-registry-cache,mode=max \
-		--cache-from type=registry,ref=localhost:5000/multi-stage-test-registry-cache,mode=max \
-		-t localhost:5000/multi-stage-test-registry \
+		--cache-to type=registry,ref=localhost:5000/multi-stage-test-registry-cache-max,mode=max \
+		--cache-from type=registry,ref=localhost:5000/multi-stage-test-registry-cache-max,mode=max \
+		-t localhost:5000/multi-stage-test-registry-max \
+		.
+
+test-registry-cache-min:
+	docker buildx build \
+		--push \
+		--cache-to type=registry,ref=localhost:5000/multi-stage-test-registry-cache-min,mode=min \
+		--cache-from type=registry,ref=localhost:5000/multi-stage-test-registry-cache-min,mode=min \
+		-t localhost:5000/multi-stage-test-registry-min \
 		.
 
 prune:
